@@ -1,0 +1,247 @@
+Script started on 2023-06-15 21:47:57-06:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="74" LINES="21"]
+[?2004h]0;caraven@caraven-Inspiron-5480: ~/Escritorio/ejercicio-hyphametrics[01;32mcaraven@caraven-Inspiron-5480[00m:[01;34m~/Escritorio/ejercicio-hyphametrics[00m$ htop[Kscript. [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C. [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[Kls
+[?2004lhd_logpresences.json  package-lock.json  viewershipcontents.json
+[0m[01;34mnode_modules[0m          script.js          viewershippresences.json
+package.json          typescript
+[?2004h]0;caraven@caraven-Inspiron-5480: ~/Escritorio/ejercicio-hyphametrics[01;32mcaraven@caraven-Inspiron-5480[00m:[01;34m~/Escritorio/ejercicio-hyphametrics[00m$ node sc ript.js 
+[?2004lPinged your deployment. You successfully connected to MongoDB!
+[36m<ref *3>[39m FindCursor {
+  _events: [Object: null prototype] {},
+  _eventsCount: [33m0[39m,
+  _maxListeners: [90mundefined[39m,
+  [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+  [[32mSymbol(client)[39m]: [36m<ref *1>[39m MongoClient {
+    _events: [Object: null prototype] {},
+    _eventsCount: [33m0[39m,
+    _maxListeners: [90mundefined[39m,
+    mongoLogger: MongoLogger {
+      error: [36m[Function: bound log][39m,
+      warn: [36m[Function: bound log][39m,
+      info: [36m[Function: bound log][39m,
+      debug: [36m[Function: bound log][39m,
+      trace: [36m[Function: bound log][39m,
+      componentSeverities: [36m[Object][39m,
+      maxDocumentLength: [33m1000[39m,
+      logDestination: [36m[Object][39m
+    },
+    s: {
+      url: [32m'mongodb+srv://caraven90:EqlgdNhlriHGrugS@cluster0.mg6hkhi.mongodb.net/?retryWrites=true&w=majority'[39m,
+      bsonOptions: [36m[Object][39m,
+      namespace: [36m[MongoDBNamespace][39m,
+      hasBeenClosed: [33mfalse[39m,
+      sessionPool: [36m[ServerSessionPool][39m,
+      activeSessions: [36m[Set][39m,
+      options: [36m[Getter][39m,
+      readConcern: [36m[Getter][39m,
+      writeConcern: [36m[Getter][39m,
+      readPreference: [36m[Getter][39m,
+      isMongoClient: [36m[Getter][39m
+    },
+    connectionLock: [90mundefined[39m,
+    topology: Topology {
+      _events: [36m[Object: null prototype][39m,
+      _eventsCount: [33m26[39m,
+      _maxListeners: [90mundefined[39m,
+      client: [36m[Circular *1][39m,
+      selectServerAsync: [36m[Function (anonymous)][39m,
+      s: [36m[Object][39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(waitQueue)[39m]: [36m[List][39m
+    },
+    [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+    [[32mSymbol(options)[39m]: [Object: null prototype] {
+      hosts: [36m[Array][39m,
+      credentials: [36m[MongoCredentials][39m,
+      serverApi: [36m[Object][39m,
+      compressors: [36m[Array][39m,
+      connectTimeoutMS: [33m30000[39m,
+      directConnection: [33mfalse[39m,
+      driverInfo: {},
+      enableUtf8Validation: [33mtrue[39m,
+      forceServerObjectId: [33mfalse[39m,
+      heartbeatFrequencyMS: [33m10000[39m,
+      keepAlive: [33mtrue[39m,
+      keepAliveInitialDelay: [33m120000[39m,
+      loadBalanced: [33mfalse[39m,
+      localThresholdMS: [33m15[39m,
+      maxConnecting: [33m2[39m,
+      maxIdleTimeMS: [33m0[39m,
+      maxPoolSize: [33m100[39m,
+      minPoolSize: [33m0[39m,
+      minHeartbeatFrequencyMS: [33m500[39m,
+      monitorCommands: [33mfalse[39m,
+      noDelay: [33mtrue[39m,
+      pkFactory: [36m[Object][39m,
+      raw: [33mfalse[39m,
+      readPreference: [36m[ReadPreference][39m,
+      retryReads: [33mtrue[39m,
+      retryWrites: [33mtrue[39m,
+      serverSelectionTimeoutMS: [33m30000[39m,
+      socketTimeoutMS: [33m0[39m,
+      srvMaxHosts: [33m0[39m,
+      srvServiceName: [32m'mongodb'[39m,
+      writeConcern: [36m[WriteConcern][39m,
+      waitQueueTimeoutMS: [33m0[39m,
+      zlibCompressionLevel: [33m0[39m,
+      dbName: [32m'test'[39m,
+      userSpecifiedAuthSource: [33mfalse[39m,
+      userSpecifiedReplicaSet: [33mfalse[39m,
+      srvHost: [32m'cluster0.mg6hkhi.mongodb.net'[39m,
+      tls: [33mtrue[39m,
+      mongoLoggerOptions: [36m[Object][39m,
+      metadata: [36m[Object][39m,
+      replicaSet: [32m'atlas-kbonpi-shard-0'[39m,
+      [[32mSymbol(@@mdb.enableMongoLogger)[39m]: [33mfalse[39m
+    }
+  },
+  [[32mSymbol(namespace)[39m]: MongoDBCollectionNamespace {
+    db: [32m'ejercicio'[39m,
+    collection: [32m'hd_logpresences'[39m
+  },
+  [[32mSymbol(id)[39m]: [1mnull[22m,
+  [[32mSymbol(documents)[39m]: List {
+    count: [33m0[39m,
+    head: [36m<ref *2>[39m {
+      next: [36m[Circular *2][39m,
+      prev: [36m[Circular *2][39m,
+      value: [1mnull[22m
+    }
+  },
+  [[32mSymbol(initialized)[39m]: [33mfalse[39m,
+  [[32mSymbol(closed)[39m]: [33mfalse[39m,
+  [[32mSymbol(killed)[39m]: [33mfalse[39m,
+  [[32mSymbol(options)[39m]: {
+    readPreference: ReadPreference {
+      mode: [32m'primary'[39m,
+      tags: [90mundefined[39m,
+      hedge: [90mundefined[39m,
+      maxStalenessSeconds: [90mundefined[39m,
+      minWireVersion: [90mundefined[39m
+    },
+    fieldsAsRaw: {},
+    useBigInt64: [33mfalse[39m,
+    promoteValues: [33mtrue[39m,
+    promoteBuffers: [33mfalse[39m,
+    promoteLongs: [33mtrue[39m,
+    serializeFunctions: [33mfalse[39m,
+    ignoreUndefined: [33mfalse[39m,
+    bsonRegExp: [33mfalse[39m,
+    raw: [33mfalse[39m,
+    enableUtf8Validation: [33mtrue[39m
+  },
+  [[32mSymbol(session)[39m]: ClientSession {
+    _events: [Object: null prototype] { ended: [36m[Function][39m },
+    _eventsCount: [33m1[39m,
+    _maxListeners: [90mundefined[39m,
+    client: [36m<ref *1>[39m MongoClient {
+      _events: [Object: null prototype] {},
+      _eventsCount: [33m0[39m,
+      _maxListeners: [90mundefined[39m,
+      mongoLogger: [36m[MongoLogger][39m,
+      s: [36m[Object][39m,
+      connectionLock: [90mundefined[39m,
+      topology: [36m[Topology][39m,
+      [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+      [[32mSymbol(options)[39m]: [36m[Object: null prototype][39m
+    },
+    sessionPool: ServerSessionPool { client: [36m[MongoClient][39m, sessions: [36m[List][39m },
+    hasEnded: [33mfalse[39m,
+    clientOptions: [Object: null prototype] {
+      hosts: [36m[Array][39m,
+      credentials: [36m[MongoCredentials][39m,
+      serverApi: [36m[Object][39m,
+      compressors: [36m[Array][39m,
+      connectTimeoutMS: [33m30000[39m,
+      directConnection: [33mfalse[39m,
+      driverInfo: {},
+      enableUtf8Validation: [33mtrue[39m,
+      forceServerObjectId: [33mfalse[39m,
+      heartbeatFrequencyMS: [33m10000[39m,
+      keepAlive: [33mtrue[39m,
+      keepAliveInitialDelay: [33m120000[39m,
+      loadBalanced: [33mfalse[39m,
+      localThresholdMS: [33m15[39m,
+      maxConnecting: [33m2[39m,
+      maxIdleTimeMS: [33m0[39m,
+      maxPoolSize: [33m100[39m,
+      minPoolSize: [33m0[39m,
+      minHeartbeatFrequencyMS: [33m500[39m,
+      monitorCommands: [33mfalse[39m,
+      noDelay: [33mtrue[39m,
+      pkFactory: [36m[Object][39m,
+      raw: [33mfalse[39m,
+      readPreference: [36m[ReadPreference][39m,
+      retryReads: [33mtrue[39m,
+      retryWrites: [33mtrue[39m,
+      serverSelectionTimeoutMS: [33m30000[39m,
+      socketTimeoutMS: [33m0[39m,
+      srvMaxHosts: [33m0[39m,
+      srvServiceName: [32m'mongodb'[39m,
+      writeConcern: [36m[WriteConcern][39m,
+      waitQueueTimeoutMS: [33m0[39m,
+      zlibCompressionLevel: [33m0[39m,
+      dbName: [32m'test'[39m,
+      userSpecifiedAuthSource: [33mfalse[39m,
+      userSpecifiedReplicaSet: [33mfalse[39m,
+      srvHost: [32m'cluster0.mg6hkhi.mongodb.net'[39m,
+      tls: [33mtrue[39m,
+      mongoLoggerOptions: [36m[Object][39m,
+      metadata: [36m[Object][39m,
+      replicaSet: [32m'atlas-kbonpi-shard-0'[39m,
+      [[32mSymbol(@@mdb.enableMongoLogger)[39m]: [33mfalse[39m
+    },
+    explicit: [33mfalse[39m,
+    supports: { causalConsistency: [33mfalse[39m },
+    clusterTime: [90mundefined[39m,
+    operationTime: [90mundefined[39m,
+    owner: [36m[Circular *3][39m,
+    defaultTransactionOptions: {},
+    transaction: Transaction {
+      state: [32m'NO_TRANSACTION'[39m,
+      options: {},
+      _pinnedServer: [90mundefined[39m,
+      _recoveryToken: [90mundefined[39m
+    },
+    [[32mSymbol(kCapture)[39m]: [33mfalse[39m,
+    [[32mSymbol(snapshotEnabled)[39m]: [33mfalse[39m,
+    [[32mSymbol(serverSession)[39m]: [1mnull[22m,
+    [[32mSymbol(txnNumberIncrement)[39m]: [33m0[39m
+  },
+  [[32mSymbol(filter)[39m]: { _id: [32m'646cea6d18c048b67b79e6b0'[39m },
+  [[32mSymbol(builtOptions)[39m]: {
+    raw: [33mfalse[39m,
+    useBigInt64: [33mfalse[39m,
+    promoteLongs: [33mtrue[39m,
+    promoteValues: [33mtrue[39m,
+    promoteBuffers: [33mfalse[39m,
+    ignoreUndefined: [33mfalse[39m,
+    bsonRegExp: [33mfalse[39m,
+    serializeFunctions: [33mfalse[39m,
+    fieldsAsRaw: {},
+    enableUtf8Validation: [33mtrue[39m,
+    writeConcern: WriteConcern { w: [32m'majority'[39m },
+    readPreference: ReadPreference {
+      mode: [32m'primary'[39m,
+      tags: [90mundefined[39m,
+      hedge: [90mundefined[39m,
+      maxStalenessSeconds: [90mundefined[39m,
+      minWireVersion: [90mundefined[39m
+    }
+  }
+}
+[?2004h]0;caraven@caraven-Inspiron-5480: ~/Escritorio/ejercicio-hyphametrics[01;32mcaraven@caraven-Inspiron-5480[00m:[01;34m~/Escritorio/ejercicio-hyphametrics[00m$ node script.js 
+[?2004lPinged your deployment. You successfully connected to MongoDB!
+Promise { [36m<pending>[39m }
+(node:24389) UnhandledPromiseRejectionWarning: MongoExpiredSessionError: Cannot use a session that has ended
+    at applySession (/home/caraven/Escritorio/ejercicio-hyphametrics/node_modules/mongodb/lib/sessions.js:657:16)
+    at Connection.command (/home/caraven/Escritorio/ejercicio-hyphametrics/node_modules/mongodb/lib/cmap/connection.js:282:53)
+    at /home/caraven/Escritorio/ejercicio-hyphametrics/node_modules/mongodb/lib/sdam/server.js:205:18
+    at Object.callback (/home/caraven/Escritorio/ejercicio-hyphametrics/node_modules/mongodb/lib/cmap/connection_pool.js:321:13)
+    at ConnectionPool.processWaitQueue (/home/caraven/Escritorio/ejercicio-hyphametrics/node_modules/mongodb/lib/cmap/connection_pool.js:543:33)
+    at /home/caraven/Escritorio/ejercicio-hyphametrics/node_modules/mongodb/lib/cmap/connection_pool.js:180:37
+    at processTicksAndRejections (internal/process/task_queues.js:77:11)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24389) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+(node:24389) [DEP0018] DeprecationWarning: Unhandled prom
