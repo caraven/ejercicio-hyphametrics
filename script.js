@@ -22,6 +22,8 @@ async function run() {
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    // const session = client.startSession();
+    // session.startTransaction();
     //Base de datos
     const db = client.db(dbName);
 
@@ -50,91 +52,196 @@ async function run() {
     await inserta_collection_json (db, 'viewershippresences_example', 'viewershippresences.json');
     */
 
-    //Se instancian las colecciones de hd_logpresences, viewershipcontents y viewershippresences ya cargadas en MongoDB
     const hd_logpresences = db.collection("hd_logpresences");
     const viewershipcontents = db.collection("viewershipcontents");
     const viewershippresences = db.collection('viewershippresences_example');
+    
+    //Se instancian la colección viewershipcontents
+    const inst_viewershipcontents = await viewershipcontents.find({});
+    var contents = [];
+    
+    await inst_viewershipcontents.forEach((viewershipcontent) => {
+       contents.push(viewershipcontent.metadata.contents);
+    });
 
-    //Consultar presence by
-    const presence = await hd_logpresences.find({"_id._id": "646cea6d18c048b67b79e6af"}).toArray();
-    console.log(presence);
+/*
+    //Análisis de datos de viewershipcontents
+    const inst_viewershipcontents = await viewershipcontents.find({});
 
-    /*
-    //Prueba para obtener un registro de hd_logpresences por su id
-    const query = {'_id': {_id: "6466bc0aa1ca2e6dca0597cb"}};
-    const sample_hd_logpresences = await hd_logpresences.findOne(query);
-    console.log('Muestra hd_logpresences:', sample_hd_logpresences);
-    */
+    try {
+      await inst_viewershipcontents.forEach (async (viewershipcontent) => {
+        const contents = viewershipcontent.metadata.contents;
+        try {
+          await contents.forEach (async (content) => {
+            //console.log(content._id._id);
+            const presences = content.presenceIds;
+            const granular = content.granularPresenceIds;
+            try
+            {
+              await presences.forEach ( async (presence) => {
+                try {
+                  const presence_hd_logpresences_id = await hd_logpresences.find({'_id._id': "presence._id"}).toArray();
+                  const presence_hd_logpresences_panelistId = await hd_logpresences.find({'panelistId._id': "presence._id"}).toArray();
+                  console.log('presenceId: ', presence_hd_logpresences_id);
+                  console.log('panelistId: ',presence_hd_logpresences_panelistId);
+                  // await session2.commitTransaction();
+                  // console.log('Transacción completada');
+                }
+                catch (error)
+                {
+                  console.error('Error al buscar la presence id', error);
+                }
+                finally {
+                  console.log("presenceId " + presence._id + " buscada con éxito");
+                }
+              });
+            }
+            catch (error)
+            {
+                console.error('Error al buscar la presenceId', error);
+            }
+            finally {
+              console.log("Presencias de content" + content._id._id + " barridas con éxito");
+            }
+          });
+        }
+        catch (error) {
+            console.error('Error al barrer los contenidos', error);
+        }
+        finally {
+          console.log("Contenidos barridos con éxito");
+        }
+      });
+    }
+    catch (error) {
+      console.error('Error al obtener los viewershipcontents', error);
+    }
+    finally
+    {
+      console.log("viewershipcontents obtenidos con exito");
+    }
+*/
+    
+//    //Prueba para obtener un registro de hd_logpresences por su id
+//    const query = {'_id': {_id: "646d062a18c048b67b7a0ca4"}};
+//    const sample_hd_logpresences = await hd_logpresences.findOne(query);
+//    console.log('Muestra hd_logpresences:', sample_hd_logpresences);
+    
+    const sample_content = find_content_by_id(contents, '6467caf2818efc00963d5295');
+    console.log('Muestra content:', sample_content);
 
-    /*
+
     //Se analizan los diferentes panelistId que vienen en la colección hd_logpresences
     const panelists_hd_logpresences = await hd_logpresences.distinct("panelistId");
-    await panelists_hd_logpresences.forEach((panelist) => {
-      panelist.presences_raw = [];
-      panelist.presences = [];
-      const panelist_presences_by_date = hd_logpresences.find({'panelistId._id': panelist._id}).sort({timestamp: 1}); //Ordena por el campo "timestamp" en orden ascendente
-      /Se inicializan las variables auxiliares para segmentar las presencias por tiempos
-      let previousRecord = null;
-      var batches = [];
-      let currentBatch = [];
-      const timeThreshold = 14000; //Tiempo que dura una presencia de hd_logpresences en ms
-      var timeDifference;
-      var timeAct, timPrev;
-      //Se barre la coleccion hd_logpresences ya ordenada por timestamp y por panelistId
-      var cont = 0, contLote = 0;
-      await hd_logpresences_by_date.forEach((document,i) => {
-        if(previousRecord) {
-          timeAct = Date.parse(document.timestamp._date);
-          timePrev = Date.parse(previousRecord.timestamp._date);
-          timeDifference = timeAct - timePrev;
-          //console.log('timeDifference: ' + timeDifference);
-          if (timeDifference > timeThreshold ||  document.panelistId._id !== previousRecord.panelistId._id)
-          {
-            //console.log('Lote ' + contLote + ':', currentBatch);
-            const panelistId = panelists_hd_logpresences.find((panelistId) => panelistId._id == document.panelistId._id);
-            if (panelistId)
-            {
-              panelistId.presences_raw.push(currentBatch);
-            }
-            else {
-              const none = panelists_hd_logpresences.find((panelistId) => panelistId._id == 'none');
-              if (none) {
-                none.presences_raw.push(currentBatch);
-              }
-            }
-            //batches.push(currentBatch);
-            currentBatch = [];
-            contLote++;
-          }
-        }
+    
+//    panelists_hd_logpresences.forEach(async (panelist) =>
+//    {
+//        try {
+//            panelist.presences_raw = [];
+//            panelist.presences = [];
+//        
+//            console.log('1. ', panelist._id);
+//            const panelist_presences_by_date = hd_logpresences.find({'panelistId._id': panelist._id}).sort({timestamp: 1}); //Ordena por el campo "timestamp" en orden ascendente
+//
+//            console.log('2. ',panelist._id);
+//            //console.log(panelist_presences_by_date);
+//            //Se inicializan las variables auxiliares para segmentar las presencias por tiempos
+//            let previousRecord = null;
+//            var batches = [];
+//            let currentBatch = [];
+//            const timeThreshold = 15000; //Tiempo que dura una presencia de hd_logpresences en ms
+//            const tolerancia = 2500;
+//            var timeDifference;
+//            var timeAct, timPrev;
+//            //Se barre la coleccion hd_logpresences ya ordenada por timestamp y por panelistId
+//            var cont = 0, contLote = 0;
+//            console.log('3.');
+//                await panelist_presences_by_date.forEach((document,i) => {
+//                    try {
+//                        console.log(document._id);
+//                        if(previousRecord) {
+//                          //
+//                          timeAct = Date.parse(document.timestamp._date);
+//                          timePrev = Date.parse(previousRecord.timestamp._date);
+//                          timeDifference = timeAct - timePrev;
+//
+//                          if (timeDifference > (timeThreshold - tolerancia) && timeDifference < (timeThreshold + tolerancia))
+//                          {
+//                            // console.log("Misma presencia: " + timeDifference);
+//                          }
+//                          else
+//                          {
+//                            console.log("Diferente presencia: " + timeDifference);
+//                          }
+//
+//                          // if (timeDifference > timeThreshold)
+//                          // {
+//                          // console.log('Lote ' + contLote + ':', currentBatch);
+//                          //   const panelistId = panelists_hd_logpresences.find((panelistId) => panelistId._id == document.panelistId._id);
+//                          //   if (panelistId)
+//                          //   {
+//                          //     panelistId.presences_raw.push(currentBatch);
+//                          //   }
+//                          //   else {
+//                          //     const none = panelists_hd_logpresences.find((panelistId) => panelistId._id == 'none');
+//                          //     if (none) {
+//                          //       none.presences_raw.push(currentBatch);
+//                          //     }
+//                          //   }
+//                          //   //batches.push(currentBatch);
+//                          //   currentBatch = [];
+//                          //   contLote++;
+//                          // }
+//                        }
+//
+//                        // currentBatch.push(document);
+//                        previousRecord = document;
+//                    } catch (e) {
+//                        console.error("Error 2", e);
+//                    } finally {
+//                      console.log("Terminado 2");
+//                    }
+//                });
+//            }
+//            catch (e) {
+//                console.error('Error 1:', e);
+//            } finally {
+//                console.log('Terminado 1');
+//            }
+//
+//    });
 
-        currentBatch.push(document);
-        previousRecord = document;
-      });
-      //Se  muestra el último lote, si tiene datos
-      if(currentBatch.length > 0) {
-        const panelistId = panelists_hd_logpresences.find((panelistId) => panelistId._id == previousRecord.panelistId._id);
-        if (panelistId)
-        {
-          panelistId.presences_raw.push(currentBatch);
-        }
-        else {
-          const none = panelists_hd_logpresences.find((panelistId) => panelistId._id == 'none');
-          if (none) {
-            none.presences_raw.push(currentBatch);
-          }
-        }
-        contLote++;
-        //console.log('Lote final:', currentBatch);
-      }
+    //Se  muestra el último lote, si tiene datos
+    // if(currentBatch.length > 0) {
+    //   const panelistId = panelists_hd_logpresences.find((panelistId) => panelistId._id == previousRecord.panelistId._id);
+    //   if (panelistId)
+    //   {
+    //     panelistId.presences_raw.push(currentBatch);
+    //   }
+    //   else {
+    //     const none = panelists_hd_logpresences.find((panelistId) => panelistId._id == 'none');
+    //     if (none) {
+    //       none.presences_raw.push(currentBatch);
+    //     }
+    //   }
+    //   contLote++;
+    //   //console.log('Lote final:', currentBatch);
+    // }
 
-      console.log('batches: ' +  contLote);
-      await panelists_hd_logpresences.forEach((panelistId) => {
-        console.log(panelistId._id + ': ', panelistId.presences_raw.length);
-      });
-    })
-    console.log('panelists in hd_logpresences: ',panelists_hd_logpresences);
-    */
+    // console.log('batches: ' +  contLote);
+    // await panelists_hd_logpresences.forEach((panelistId) => {
+    //   console.log(panelistId._id + ': ', panelistId.presences_raw.length);
+    // });
+  // await session.commitTransaction();
+  // console.log('Transacción completada');
+  
+  /* FUncion para filtrar contenido
+//    let result = filter_content_by_date(contents, "2023-05-19T18:48:49.353Z", "2023-05-19T19:38:03.438Z");
+//    console.log(result);
+//    console.log(result.length);
+   */
+
+
 
     /*
     //Se analizan los diferentes tipos de presencias que vienen en la colección hd_logpresences
@@ -206,6 +313,13 @@ async function run() {
     */
 
 /*
+    const panelists_hd_logpresences = await hd_logpresences.distinct("panelistId");
+    console.log(panelists_hd_logpresences);
+    await panelists_hd_logpresences.forEach(async (panelist) => {
+      panelist.presences_raw = [];
+      panelist.presences = [];
+    });
+    console.log(panelists_hd_logpresences);
     //Se consulta la colección hd_logpresences ordenada por fecha en el campo
     //timestamp, para asegurar que los datos vengan ordenados
     const hd_logpresences_by_date = hd_logpresences.find({}).sort({timestamp: 1}) //Ordena por el campo "timestamp" en orden ascendente
@@ -225,7 +339,7 @@ async function run() {
         timeAct = Date.parse(document.timestamp._date);
         timePrev = Date.parse(previousRecord.timestamp._date);
         timeDifference = timeAct - timePrev;
-        //console.log('timeDifference: ' + timeDifference);
+        console.log('timeDifference: ' + timeDifference);
         if (timeDifference > timeThreshold ||  document.panelistId._id !== previousRecord.panelistId._id)
         {
           //console.log('Lote ' + contLote + ':', currentBatch);
@@ -265,22 +379,29 @@ async function run() {
       contLote++;
       //console.log('Lote final:', currentBatch);
     }
+    */
 
-    console.log('batches: ' +  contLote);
-    await panelists_hd_logpresences.forEach((panelistId) => {
-      console.log(panelistId._id + ': ', panelistId.presences_raw.length);
-    });
+    // console.log('batches: ' +  contLote);
+    // await panelists_hd_logpresences.forEach((panelistId) => {
+    //   console.log(panelistId._id + ': ', panelistId.presences_raw.length);
+    // });
 
-*/
 
     // await batches.forEach((presence, i) => {
     //
     // });
 
-
-  } finally {
+    // await session.commitTransaction();
+    // console.log('Transacción completada');
+    // session.endSession();
+  }
+  // catch (e) {
+  //   console.error("Error " + e + " en la función general");
+  // }
+  finally {
     // Ensures that the client will close when you finish/error
     await client.close();
+    console.log('Conexión cerrada');
   }
 }
 run().catch(console.dir);
@@ -306,4 +427,16 @@ async function inserta_collection_json (db, collect, json_filename)
     // Insertar los documentos en la colección
     const result = await collection.insertMany(documents);
     console.log(`${result.insertedCount} documentos insertados`);
+}
+
+function find_content_by_id (contents, id) {
+    var result;
+    for (let i = 0; i < contents.length; i++){
+        let act_content = contents[i];
+        result = act_content.find((content) => {
+            return content._id._id === id;
+        });
+//        console.log(result);
+    }
+    return result;
 }
